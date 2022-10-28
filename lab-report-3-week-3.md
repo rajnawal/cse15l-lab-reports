@@ -83,8 +83,8 @@ Lastly, the following screenshot details the behavior when a search is made with
   }
 ```
 <!-- -->
-- Symptom: The function returned 0.0 instead of 1.0.
-<!-- -->
+- Symptom: The function returned 0.0 instead of 1.0.  
+<!-- -->  
 ```
 There was 1 failure:
 1) testAverageWithoutLowest(ArrayTests)
@@ -95,7 +95,7 @@ java.lang.AssertionError: expected:<1.0> but was:<0.0>
         at org.junit.Assert.assertEquals(Assert.java:685)
         at ArrayTests.testAverageWithoutLowest(ArrayTests.java:22)
 
-FAILURES!!!
+  FAILURES!!!
 ```
 <!-- -->
 - Bug: The method excludes every number that is the lowest, so if the lowest number appears multiple times, then the average will be off.  
