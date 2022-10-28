@@ -110,7 +110,7 @@ static double averageWithoutLowest(double[] arr) {
   ```
   - Connection between symptom and the bug: As the bug was excluding all occurences of the lowest number, the output was `0.0` because the argument array solely consisted of the same number twice. Thus, both occurences were ignored, and the output ended up being `0.0`.
 
-  ### filter
+  ### filter:
   - Input: {“irony”, “smile”}
   ```JAVA
   @Test
