@@ -122,7 +122,7 @@ static double averageWithoutLowest(double[] arr) {
     }   
 ```
   - Symptoms: Output was {“smile”, “irony”}
-  ```bash
+```bash
   1) testFilter(ListTests)
 arrays first differed at element [0]; expected:<[irony]> but was:<[smile]>
         at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:78)
@@ -142,7 +142,7 @@ Caused by: org.junit.ComparisonFailure: expected:<[irony]> but was:<[smile]>
   - Bug: The function added every string that passed the check to front, which effectively returned all the strings that passed the check in reversed order.
   - Connection between symptom and bug: The resulting array was in the reversed order of the expected array. This is because in the code, every element that passed the filter was being added to the front. This is why we saw what we did.   
   Code to fix the bug follows:
-  ```JAVA
+```JAVA
   static List<String> filter(List<String> list, StringChecker sc) {
     List<String> result = new ArrayList<>();
     for(String s: list) {
