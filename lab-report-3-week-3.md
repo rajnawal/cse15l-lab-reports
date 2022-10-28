@@ -1,7 +1,7 @@
 # Part 1
 ## Code for Search Engine
 
-```Java
+```
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URI;
@@ -74,15 +74,18 @@ Lastly, the following screenshot details the behavior when a search is made with
 
 ### averageWithoutLowest:
 - Failure-inducing input: {1.0, 1.0}
-```JAVA
+<!-- -->
+```
 @Test
   public void testAverageWithoutLowest(){
     double[] input = { 1.0,1.0};
     assertEquals(1.0, ArrayExamples.averageWithoutLowest(input), 0.001);
   }
 ```
+<!-- -->
 - Symptom: The function returned 0.0 instead of 1.0.
-```bash
+<!-- -->
+```
 There was 1 failure:
 1) testAverageWithoutLowest(ArrayTests)
 java.lang.AssertionError: expected:<1.0> but was:<0.0>
@@ -94,10 +97,12 @@ java.lang.AssertionError: expected:<1.0> but was:<0.0>
 
 FAILURES!!!
 ```
+<!-- -->
 - Bug: The method excludes every number that is the lowest, so if the lowest number appears multiple times, then the average will be off.  
 Code fix follows:
-```JAVA
-static double averageWithoutLowest(double[] arr) {
+<!-- -->
+```
+    static double averageWithoutLowest(double[] arr) {
     if(arr.length < 2) { return 0.0; }
     double lowest = arr[0];
     double sum = 0.0;
@@ -105,14 +110,16 @@ static double averageWithoutLowest(double[] arr) {
       sum += num;
       if(num < lowest) { lowest = num; }
     }
-    return (sum - lowest) / (arr.length - 1);
-  }
+    return (sum - lowest) / (arr.length - 1);}
 ```
-  - Connection between symptom and the bug: As the bug was excluding all occurences of the lowest number, the output was `0.0` because the argument array solely consisted of the same number twice. Thus, both occurences were ignored, and the output ended up being `0.0`.
+<!-- -->
 
-  ### filter:
+- Connection between symptom and the bug: As the bug was excluding all occurences of the lowest number, the output was `0.0` because the argument array solely consisted of the same number twice. Thus, both occurences were ignored, and the output ended up being `0.0`.
+
+### filter:
   - Input: {“irony”, “smile”}
-```JAVA
+<!-- -->
+```
   @Test
     public void testFilter(){
         List<String> input = List.of("irony", "smile");
@@ -121,8 +128,10 @@ static double averageWithoutLowest(double[] arr) {
         assertArrayEquals(input.toArray(), ListExamples.filter(input, checker).toArray());
     }   
 ```
+<!-- -->
   - Symptoms: Output was {“smile”, “irony”}
-```bash
+<!-- -->
+```
   1) testFilter(ListTests)
 arrays first differed at element [0]; expected:<[irony]> but was:<[smile]>
         at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:78)
@@ -139,11 +148,13 @@ Caused by: org.junit.ComparisonFailure: expected:<[irony]> but was:<[smile]>
         at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:76)
         ... 38 more
 ```
+<!-- -->
   - Bug: The function added every string that passed the check to front, which effectively returned all the strings that passed the check in reversed order.
   - Connection between symptom and bug: The resulting array was in the reversed order of the expected array. This is because in the code, every element that passed the filter was being added to the front. This is why we saw what we did.   
   Code to fix the bug follows:
-```JAVA
-  static List<String> filter(List<String> list, StringChecker sc) {
+<!-- -->
+``` 
+    static List<String> filter(List<String> list, StringChecker sc) {
     List<String> result = new ArrayList<>();
     for(String s: list) {
       if(sc.checkString(s)) {
@@ -151,6 +162,5 @@ Caused by: org.junit.ComparisonFailure: expected:<[irony]> but was:<[smile]>
       }
     }
     return result;
-  }
+    }
 ```
-
